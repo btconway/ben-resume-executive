@@ -6,155 +6,124 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Type definitions for resume data
-type SkillLevel = "Beginner" | "Intermediate" | "Advanced" | "Expert";
-
-interface ProgrammingSkill {
-  name: string;
-  level: SkillLevel;
-}
 
 // Resume data
 export const resumeData = {
   personal: {
-    name: "Ben Conway",
-    title: "Technical Product Lead & AI Enthusiast",
-    location: "Chicago, IL",
+    name: "Benjamin Conway",
+    title: "Strategic Partnerships & Business Development Executive",
+    location: "Chicago, IL → SF Bay Area",
     email: "benjamin.t.conway@gmail.com",
+    phone: "714-746-8704",
     linkedin: "linkedin.com/in/conwaybenjamin",
     github: "btconway",
-    summary: "Building innovative AI solutions with a focus on healthcare and enterprise applications. Co-founder with extensive technical product leadership experience and multiple patents in holographic and 3D technology.",
+    summary: "Strategic partnerships executive with proven track record of building enterprise technology alliances from zero to industry-leading ecosystem. As Co-Founder & COO of VNTANA, created and scaled partnership program to 15+ strategic alliances with Sony, Meta, Amazon, and Google while driving $8M+ in total revenue. Combined entrepreneurial agility with enterprise-grade execution, navigating complex Fortune 500 procurement processes and regulatory compliance. Seeking to leverage partnership innovation expertise and AI business understanding to scale OpenAI's strategic alliance program across AMER region.",
   },
   
-  skills: {
-    programming: [
-      { name: "Python", level: "Intermediate" },
-      { name: "JavaScript/TypeScript", level: "Beginner" },
-      { name: "Next.js", level: "Beginner" },
-      { name: "SQL", level: "Beginner" },
-      { name: "Git", level: "Beginner" },
-    ] as ProgrammingSkill[],
-    ai: [
-      "RAG Architecture",
-      "LLM Integration",
-      "Vector Databases",
-      "Prompt Engineering",
-      "Supabase",
-      "Google Cloud Platform",
-      "REST APIs"
-    ]
-  },
+  coreCompetencies: [
+    "Strategic Partnerships",
+    "Enterprise Channel Development",
+    "Go-to-Market Strategy",
+    "Cross-Functional Leadership",
+    "P&L Management",
+    "Regulatory Compliance",
+    "AI Business Applications",
+    "SaaS Partnerships",
+    "Contract Negotiation",
+    "Systems Integration",
+    "Revenue Growth",
+    "Stakeholder Management"
+  ],
   
   education: {
-    aiPath: {
-      title: "Technical Education Path for AI",
-      subtitle: "Self-Learning Curriculum for MS in AI Preparation",
-      courses: [
-        {
-          name: "Introduction to Discrete Mathematics for Computer Science",
-          provider: "Coursera, UC San Diego",
-          completion: "Expected June 2025",
-          description: "Building mathematical foundation for understanding computer science concepts and algorithms"
-        },
-        {
-          name: "Google's Crash Course on Python",
-          provider: "Coursera",
-          completion: "Expected April 2025",
-          description: "Developing Python programming skills for data analysis and algorithmic problem-solving"
-        },
-        {
-          name: "Algorithms, Part I",
-          provider: "Coursera, Princeton University",
-          completion: "Expected June 2025",
-          description: "Data structures and their Java implementations, plus sorting/searching algorithms (CS 314 equivalent)"
-        },
-        {
-          name: "Algorithmic Toolbox",
-          provider: "Coursera, UC San Diego",
-          completion: "Expected September 2025",
-          description: "Dynamic programming, divide-and-conquer, and greedy algorithms (CS 331 equivalent)"
-        },
-        {
-          name: "Linear Algebra",
-          provider: "MIT OpenCourseWare",
-          completion: "Expected September 2025",
-          description: "Building mathematical foundation for understanding machine learning algorithms and research papers"
-        }
-      ]
-    },
     university: {
       name: "University of Southern California",
-      period: "2005 - 2009",
-      degree: "Bachelor of Science in Business Administration",
-      program: "Entrepreneurship Program at Lloyd Greif Center",
-      relevantCourses: "Calculus, Probability, Business Statistics, Data Analysis",
-      research: "Statistical analysis of technology adoption trends"
+      period: "Graduated",
+      degree: "Bachelor of Business Administration",
+      emphasis: "Entrepreneurship",
+      location: "Los Angeles, CA"
     }
   },
   
-  projects: [
-    {
-      title: "Medical Communication Simulation Tool",
-      period: "2024 - Present",
-      tags: ["Next.js", "OpenAI", "Supabase"],
-      details: [
-        "Designed and built AI system for physicians to practice patient communications",
-        "Developed full-stack app with Next.js, Supabase, and OpenAI integration",
-        "Currently used at University of Chicago for research and will be presented at IPSSW Conference in Munich"
-      ]
-    },
-    {
-      title: "AI-Enhanced Sales Assistant",
-      period: "2024",
-      tags: ["Python", "Langchain", "Weaviate"],
-      details: [
-        "Built NLP tool to automate sales content generation",
-        "Created knowledge base structure and optimization strategy",
-        "Solution reduced content creation time by approximately 65%"
-      ]
-    }
-  ],
   
   experience: [
     {
       company: "VNTANA",
-      position: "Co-Founder & COO",
-      period: "August 2012 - Present",
+      position: "Co-Founder & Chief Operating Officer",
+      period: "2012 – Present",
+      location: "Los Angeles, CA",
+      description: "SaaS platform for 3D/AR commerce and hologram experiences (16-30 employees, $16M raised)",
+      categories: {
+        partnerships: {
+          title: "Partnership Development & Strategic Alliances:",
+          details: [
+            "Built partnership program from zero to 15+ strategic alliances including Sony (XYN platform infrastructure), Meta Reality Labs (3D commerce API), Amazon (3D asset publishing), Google Cloud, Canva, and PTC",
+            "Secured Fortune 500 enterprise customers including Johnson & Johnson, Puma, Kohler, Patagonia, Pfizer, AT&T, and Ericsson through direct sales and partner channels",
+            "Drove $8M+ total revenue across company lifecycle with 90% closure rate in final-stage enterprise negotiations",
+            "Orchestrated cross-functional GTM initiatives coordinating engineering, product, sales, and marketing teams to deliver integrated partner solutions and meet enterprise requirements"
+          ]
+        },
+        operations: {
+          title: "Operational Leadership & Compliance:",
+          details: [
+            "Led SOC2 Type II certification establishing enterprise-grade security standards required for pharmaceutical and Fortune 500 partnerships",
+            "Scaled team from 3 to 30 employees at peak while maintaining lean operations and high performance culture",
+            "Co-raised $16M total funding from investors including Mark Cuban, Brendan Iribe (Oculus co-founder), and General David Petraeus",
+            "Navigated complex enterprise procurement including HIPAA compliance for healthcare clients and regulatory requirements across multiple industries"
+          ]
+        },
+        business: {
+          title: "Business Development & Market Expansion:",
+          details: [
+            "Pioneered new market categories through innovative partnerships (first 3D asset integration with Amazon product pages)",
+            "Established multi-industry presence spanning retail, manufacturing, telecommunications, and healthcare verticals",
+            "Created scalable processes for partner onboarding, technical integration, and performance measurement"
+          ]
+        },
+        technical: {
+          title: "Technical Innovation & AI Leadership:",
+          details: [
+            "Co-invented 4+ patents including AI/ML systems for holographic interaction (US10832424) and computer vision applications",
+            "Led development of AI-powered sales automation tool using Python, Langchain, and Weaviate, reducing content creation time by 65%",
+            "Won Unity Award for \"Most Innovative Consumer Experience\" with Kohler partnership (2024)"
+          ]
+        }
+      }
+    },
+    {
+      company: "ClinicalSim.ai",
+      position: "Founder & CEO (Part-time)",
+      period: "2024 – Present",
       details: [
-        "Raised $15M in venture funding through strategic investor relationships",
-        "Led company pivot from holographic hardware to 3D software platform",
-        "Managed cross-functional teams across product, engineering, and sales",
-        "Co-inventor on multiple patents for holographic technology innovations"
+        "Developed AI-powered medical training platform leveraging conversational AI and natural language processing",
+        "Secured partnerships with University of Chicago and Advocate Health demonstrating enterprise AI deployment capabilities",
+        "Achieved HIPAA compliance and healthcare data security standards for regulated industry"
       ]
     },
     {
       company: "ADP",
       position: "District Manager",
-      period: "2010 - 2012",
+      period: "2010 – 2012",
+      location: "Los Angeles, CA",
       details: [
-        "Top performer in software sales and customer account management"
-      ]
-    },
-    {
-      company: "Gameday Glasses",
-      position: "Co-Founder & CEO",
-      period: "2009 - 2010",
-      details: [
-        "Early entrepreneurial venture developing consumer products"
+        "Exceeded revenue targets selling enterprise payroll and HR solutions to SMB market",
+        "Built systematic approach to customer acquisition increasing pipeline velocity 40%"
       ]
     }
   ],
   
   patents: {
+    description: "Co-invented 4+ patents including AI/ML systems for holographic interaction (US10832424) and computer vision applications",
     ai: [
       {
         id: "US10832424",
         title: "Interactive Holographic Avatar Control Systems",
-        description: "Machine learning system for user interaction with holographic projections"
+        description: "AI/ML systems for user interaction with holographic projections"
       },
       {
         id: "US11436504", 
         title: "Depth Key Compositing Systems",
-        description: "AI-assisted digital image processing for 3D rendering"
+        description: "Computer vision applications for 3D rendering"
       }
     ],
     hardware: [
@@ -171,53 +140,32 @@ export const resumeData = {
     ]
   },
   
-  research: [
+  recognition: [
     {
-      title: "Natural Language Processing",
-      description: "Specialized domains (healthcare, education)",
-      icon: "💬"
+      title: "Forbes 30 Under 30",
+      category: "Marketing & Advertising",
+      year: "2018"
     },
     {
-      title: "Multimodal AI Systems",
-      description: "Combining text, image, and 3D data",
-      icon: "🔄"
+      title: "Inc. 5000 Fastest-Growing Companies",
+      category: "Company Recognition",
+      year: "Multiple Years"
     },
     {
-      title: "Human-AI Interaction",
-      description: "Communication and collaboration interfaces",
-      icon: "👥"
+      title: "Speaker",
+      category: "Industry Conferences",
+      details: "Autodesk University, PTC Global Conference, AWE"
     },
     {
-      title: "Healthcare AI Applications",
-      description: "Focus on healthcare AI applications that align with UT Austin's research strengths",
-      icon: "🏥"
+      title: "Active Member",
+      category: "Professional Organizations",
+      details: "Khronos Group (3D technology standards)"
+    },
+    {
+      title: "Board Advisor",
+      category: "Professional Involvement",
+      details: "Early-stage technology startups"
     }
   ],
   
-  awards: [
-    {
-      title: "Unity Award",
-      year: "2024",
-      description: "Award to VNTANA (company I co-founded) for 'Most Innovative Consumer Experience' with Kohler",
-      icon: "🎮"
-    },
-    {
-      title: "Forbes 30 Under 30",
-      year: "2018",
-      description: "Recognized for innovation in technology",
-      icon: "🏆"
-    },
-    {
-      title: "Inc. 500",
-      year: "2018",
-      description: "Award to VNTANA (company I co-founded) - ranked #497",
-      icon: "🚀"
-    },
-    {
-      title: "Patrick Soon-Shiong Innovation Award",
-      year: "2017", 
-      description: "Award to VNTANA (company I co-founded) for AR technology by Los Angeles Business Journal",
-      icon: "💡"
-    }
-  ]
 }

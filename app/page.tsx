@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { Mail, Linkedin, MapPin, Github, ExternalLink, ChevronRight } from "lucide-react"
+import { Mail, Linkedin, MapPin, Phone, ExternalLink, ChevronRight } from "lucide-react"
 // ThemeProvider is now in the providers.tsx file
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Badge } from "@/components/ui/badge"
@@ -9,12 +9,7 @@ import { resumeData } from "@/lib/utils"
 
 // Import separated components
 import { SectionContainer } from "@/components/resume/section-container"
-import { SkillBar, SkillChip } from "@/components/resume/skill-components"
-import { ProjectCard } from "@/components/resume/project-card"
-import { TimelineItem } from "@/components/resume/timeline-item"
-import { ResearchCard } from "@/components/resume/research-card"
 import { HeroSection } from "@/components/resume/hero-section"
-import { AwardItem } from "@/components/resume/award-item"
 
 /**
  * Main page component that assembles all resume sections
@@ -31,7 +26,7 @@ export default function Home() {
         {/* Floating navigation for desktop */}
         <nav className="fixed right-4 top-1/2 -translate-y-1/2 z-50 hidden lg:block" aria-label="Section navigation">
           <ul className="space-y-4">
-            {["hero", "skills", "education", "projects", "patents", "experience", "research", "awards"].map((section) => (
+            {["hero", "competencies", "experience", "education", "patents", "recognition"].map((section) => (
               <li key={section}>
                 <a
                   href={`#${section}`}
@@ -69,120 +64,76 @@ export default function Home() {
           {/* Hero Section */}
           <HeroSection />
 
-          {/* Technical Skills Section */}
-          <SectionContainer title="Technical Skills" id="skills" animateIn={true}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold mb-4">Programming & Development</h3>
-
-                {resumeData.skills.programming.map((skill, index) => (
-                  <SkillBar key={index} name={skill.name} level={skill.level} />
-                ))}
-              </div>
-
-              <div className="space-y-6">
-                <h3 className="text-xl font-semibold mb-4">AI & Machine Learning</h3>
-                <p className="text-sm text-muted-foreground mb-3">Hands-on experience aided by AI tools</p>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {resumeData.skills.ai.map((skill, index) => (
-                    <SkillChip key={index} name={skill} />
-                  ))}
+          {/* Core Competencies Section */}
+          <SectionContainer title="Core Competencies" id="competencies" animateIn={true}>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {resumeData.coreCompetencies.map((competency, index) => (
+                <div key={index} className="p-4 border rounded-lg bg-card hover:shadow-md transition-all hover:-translate-y-1 text-center">
+                  <span className="font-medium text-sm">{competency}</span>
                 </div>
-              </div>
+              ))}
+            </div>
+          </SectionContainer>
+
+          {/* Professional Experience Section */}
+          <SectionContainer title="Professional Experience" id="experience" animateIn={true}>
+            <div className="space-y-8">
+              {resumeData.experience.map((exp, index) => (
+                <div key={index} className="border rounded-lg p-6 bg-card hover:shadow-md transition-all">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-primary">{exp.company} | {exp.position}</h3>
+                    <p className="text-sm font-medium text-muted-foreground">{exp.period} | {exp.location}</p>
+                    {exp.description && (
+                      <p className="text-sm text-muted-foreground italic mt-1">{exp.description}</p>
+                    )}
+                  </div>
+                  
+                  {exp.categories ? (
+                    <div className="space-y-6">
+                      {Object.entries(exp.categories).map(([key, category]) => (
+                        <div key={key}>
+                          <h4 className="font-semibold mb-3 text-primary">{category.title}</h4>
+                          <ul className="space-y-2">
+                            {category.details.map((detail, detailIndex) => (
+                              <li key={detailIndex} className="flex items-start gap-3">
+                                <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true"></div>
+                                <span className="text-sm leading-relaxed">{detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="space-y-2">
+                      {exp.details.map((detail, detailIndex) => (
+                        <li key={detailIndex} className="flex items-start gap-3">
+                          <div className="mt-2 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true"></div>
+                          <span className="text-sm leading-relaxed">{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
           </SectionContainer>
 
           {/* Education Section */}
-          <SectionContainer title="Education & Learning" id="education" animateIn={true}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-6 border rounded-lg bg-card hover:shadow-md transition-all hover:-translate-y-1">
-                <h3 className="text-xl font-semibold mb-2">{resumeData.education.aiPath.title}</h3>
-                <p className="text-sm text-primary font-medium mb-4">{resumeData.education.aiPath.subtitle}</p>
-                <p className="text-sm mb-4">Strategic curriculum designed to build foundational knowledge in computer science, mathematics and machine learning concepts required for advanced AI research and development:</p>
-
-                <ul className="space-y-3">
-                  {resumeData.education.aiPath.courses.map((course, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="mt-1 w-2 h-2 rounded-full bg-primary flex-shrink-0" aria-hidden="true"></div>
-                      <div>
-                        <p className="font-medium">{course.name}</p>
-                        <p className="text-sm text-muted-foreground">{course.provider} - {course.completion}</p>
-                        <p className="text-xs mt-1">{course.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="p-6 border rounded-lg bg-card hover:shadow-md transition-all hover:-translate-y-1">
-                <h3 className="text-xl font-semibold">{resumeData.education.university.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{resumeData.education.university.period}</p>
-
-                <div className="mb-4">
-                  <p className="font-medium">{resumeData.education.university.degree}</p>
-                  <p className="text-sm">{resumeData.education.university.program}</p>
-                </div>
-
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-primary flex-shrink-0" aria-hidden="true"></div>
-                    <div>
-                      <p className="font-medium">Relevant Technical Coursework</p>
-                      <p className="text-sm text-muted-foreground">{resumeData.education.university.relevantCourses}</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-primary flex-shrink-0" aria-hidden="true"></div>
-                    <div>
-                      <p className="font-medium">Academic Research Project</p>
-                      <p className="text-sm text-muted-foreground">{resumeData.education.university.research}</p>
-                    </div>
-                  </li>
-                </ul>
-                
-                <div className="rounded-lg bg-muted p-3">
-                  <h4 className="text-sm font-medium mb-2">Future Academic Plans</h4>
-                  <p className="text-xs">Applying to MS in AI programs to formalize technical education, with focus on healthcare and enterprise applications. Seeking programs with strong research components in NLP and multimodal AI systems.</p>
-                </div>
-              </div>
-            </div>
-          </SectionContainer>
-
-          {/* AI Projects Section */}
-          <SectionContainer title="Featured Projects" id="projects" animateIn={true}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {resumeData.projects.map((project, index) => (
-                <ProjectCard
-                  key={index}
-                  title={project.title}
-                  period={project.period}
-                  tags={project.tags}
-                  details={[
-                    ...project.details,
-                    // Additional details from the original component that weren't in the shared data
-                    ...(project.title === "Medical Communication Simulation Tool" 
-                      ? [
-                          "Designed the conversation flow and prompt engineering for realistic clinical scenarios",
-                          "Implemented user authentication and session management features"
-                        ]
-                      : project.title === "AI-Enhanced Sales Assistant" 
-                      ? [
-                          "Collaborated with team using Python, Langchain framework and Weaviate vector database",
-                          "Created custom prompt templates to ensure consistent, high-quality content output"
-                        ]
-                      : [])
-                  ]}
-                />
-              ))}
+          <SectionContainer title="Education" id="education" animateIn={true}>
+            <div className="p-6 border rounded-lg bg-card hover:shadow-md transition-all">
+              <h3 className="text-xl font-semibold">{resumeData.education.university.name}</h3>
+              <p className="text-sm text-muted-foreground mb-2">{resumeData.education.university.degree}</p>
+              <p className="text-sm mb-2">Emphasis: {resumeData.education.university.emphasis}</p>
+              <p className="text-sm text-muted-foreground">{resumeData.education.university.location}</p>
             </div>
           </SectionContainer>
 
           {/* Patents & Intellectual Property Section */}
           <SectionContainer title="Patents & Intellectual Property" id="patents" animateIn={true}>
             <div className="p-6 border rounded-lg bg-card hover:shadow-md transition-all">
-              <h3 className="text-xl font-semibold mb-4">Co-Inventor on Multiple Patents</h3>
-              <p className="mb-4">Named inventor on several granted and pending patents for innovations in holographic and 3D technology, including AI-related applications:</p>
+              <h3 className="text-xl font-semibold mb-4">Technical Innovation & AI Leadership</h3>
+              <p className="mb-4">{resumeData.patents.description}</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* AI-Related Patents - Highlighted */}
@@ -221,80 +172,24 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-              
-              <p className="mt-4 text-sm text-muted-foreground">These innovations represent a cross-disciplinary approach combining physical computing, optics, and emerging AI technologies.</p>
             </div>
           </SectionContainer>
 
-          {/* Professional Experience Section */}
-          <SectionContainer title="Professional Journey" id="experience" animateIn={true}>
-            <div className="space-y-8">
-              <TimelineItem
-                company={resumeData.experience[0].company}
-                position={resumeData.experience[0].position}
-                period={resumeData.experience[0].period}
-                details={[
-                  ...resumeData.experience[0].details,
-                  // Additional details from the original component
-                  "Secured and managed enterprise partnerships with Adidas, Nike, Kohler, and other Fortune 500 companies",
-                  "Developed go-to-market strategy resulting in ~$2M ARR",
-                  "Negotiated and closed multiple $500K+ enterprise deals with major brands",
-                  "Created strategic partnerships with key industry technology platforms",
-                  "Identified market opportunity for 3D asset optimization, leading to development of company's core IP",
-                  "Developed proprietary IP that became core to company's technology advantage",
-                  "Collaborated on R&D for novel projection and interaction systems",
-                  "Represented company at industry conferences and speaking engagements"
-                ]}
-              />
 
-              <div className="grid grid-cols-2 gap-6">
-                <TimelineItem
-                  company={resumeData.experience[1].company}
-                  position={resumeData.experience[1].position}
-                  period={resumeData.experience[1].period}
-                  details={resumeData.experience[1].details}
-                  compact={true}
-                />
-
-                <TimelineItem
-                  company={resumeData.experience[2].company}
-                  position={resumeData.experience[2].position}
-                  period={resumeData.experience[2].period}
-                  details={resumeData.experience[2].details}
-                  compact={true}
-                />
-              </div>
-            </div>
-          </SectionContainer>
-
-          {/* Research Interests Section */}
-          <SectionContainer title="Research Interests" id="research" animateIn={true}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {resumeData.research.map((research, index) => (
-                <ResearchCard 
-                  key={index}
-                  title={research.title}
-                  description={research.description}
-                  icon={research.icon}
-                />
-              ))}
-            </div>
-          </SectionContainer>
-
-          {/* Awards Section */}
-          <SectionContainer title="Awards & Recognitions" id="awards" animateIn={true}>
+          {/* Recognition & Professional Involvement Section */}
+          <SectionContainer title="Recognition & Professional Involvement" id="recognition" animateIn={true}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {resumeData.awards.map((award, index) => (
-                <AwardItem
-                  key={index}
-                  title={award.title}
-                  year={award.year}
-                  description={award.description}
-                  icon={award.icon}
-                />
+              {resumeData.recognition.map((item, index) => (
+                <div key={index} className="p-4 border rounded-lg bg-card hover:shadow-md transition-all hover:-translate-y-1">
+                  <h4 className="font-semibold text-primary mb-2">{item.title}</h4>
+                  <p className="text-sm text-muted-foreground mb-1">{item.category}</p>
+                  {item.year && <p className="text-sm font-medium">{item.year}</p>}
+                  {item.details && <p className="text-sm mt-1">{item.details}</p>}
+                </div>
               ))}
             </div>
           </SectionContainer>
+
         </main>
 
         <footer className="bg-muted py-8 mt-12" id="contact">
@@ -302,16 +197,20 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div>
                 <h2 className="text-xl font-bold mb-2">{resumeData.personal.name}</h2>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <MapPin size={14} aria-hidden="true" />
-                    <span>{resumeData.personal.location}</span>
-                  </div>
+                <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Mail size={14} aria-hidden="true" />
                     <a href={`mailto:${resumeData.personal.email}`} className="hover:text-primary transition-colors">
                       {resumeData.personal.email}
                     </a>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Phone size={14} aria-hidden="true" />
+                    <span>{resumeData.personal.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MapPin size={14} aria-hidden="true" />
+                    <span>{resumeData.personal.location}</span>
                   </div>
                 </div>
               </div>
@@ -324,22 +223,6 @@ export default function Home() {
                   aria-label="LinkedIn profile"
                 >
                   <Linkedin size={18} aria-hidden="true" />
-                </a>
-                <a
-                  href={`https://github.com/${resumeData.personal.github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-background flex items-center justify-center hover:bg-primary/10 transition-colors"
-                  aria-label="GitHub profile"
-                >
-                  <Github size={18} aria-hidden="true" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-background flex items-center justify-center hover:bg-primary/10 transition-colors"
-                  aria-label="Personal website"
-                >
-                  <ExternalLink size={18} aria-hidden="true" />
                 </a>
               </div>
             </div>

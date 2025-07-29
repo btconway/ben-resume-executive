@@ -3,9 +3,9 @@ import './globals.css'
 import { Providers } from '@/components/providers'
 
 export const metadata: Metadata = {
-  title: 'Ben Conway - Technical Product Lead & AI Enthusiast',
-  description: 'Portfolio showcasing my experience with AI development and technical product leadership',
-  keywords: 'technical product, AI, machine learning, Next.js, Python, TypeScript',
+  title: 'Benjamin Conway - Strategic Partnerships & Business Development Executive',
+  description: 'Strategic partnerships executive with proven track record of building enterprise technology alliances from zero to industry-leading ecosystem',
+  keywords: 'strategic partnerships, business development, enterprise sales, go-to-market, OpenAI, VNTANA, Fortune 500',
 }
 
 /**

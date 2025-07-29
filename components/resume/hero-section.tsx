@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { Mail, Linkedin, Github } from "lucide-react"
+import { Mail, Linkedin, Github, Phone, MapPin } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { resumeData } from "@/lib/utils"
 
@@ -24,12 +24,26 @@ export function HeroSection() {
         <p className="text-lg text-muted-foreground mb-6 animate-slideUp animation-delay-100">
           {resumeData.personal.summary}
         </p>
-        <div className="flex flex-wrap gap-3 mb-8 animate-slideUp animation-delay-200">
-          {[...resumeData.skills.programming.map(skill => skill.name), ...resumeData.skills.ai.slice(0, 4)].map((skill, i) => (
+        <div className="flex flex-wrap gap-3 mb-6 animate-slideUp animation-delay-200">
+          {resumeData.coreCompetencies.slice(0, 6).map((skill, i) => (
             <Badge key={i} variant="outline" className="px-3 py-1 text-sm">
               {skill}
             </Badge>
           ))}
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 mb-6 text-sm text-muted-foreground animate-slideUp animation-delay-250">
+          <div className="flex items-center gap-2">
+            <Mail size={16} aria-hidden="true" />
+            <span>{resumeData.personal.email}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Phone size={16} aria-hidden="true" />
+            <span>{resumeData.personal.phone}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={16} aria-hidden="true" />
+            <span>{resumeData.personal.location}</span>
+          </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 animate-slideUp animation-delay-300">
           <a
@@ -49,16 +63,6 @@ export function HeroSection() {
           >
             <Linkedin size={16} aria-hidden="true" />
             <span>LinkedIn</span>
-          </a>
-          <a
-            href={`https://github.com/${resumeData.personal.github}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-muted text-foreground rounded-md hover:bg-muted/80 transition-colors"
-            aria-label={`Visit ${resumeData.personal.name}'s GitHub profile`}
-          >
-            <Github size={16} aria-hidden="true" />
-            <span>GitHub</span>
           </a>
         </div>
       </div>
