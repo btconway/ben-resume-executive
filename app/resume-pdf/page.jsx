@@ -1,7 +1,9 @@
 "use client"
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 
-const ResumePDFViewerWithNoSSR = dynamic(
+export const dynamic = 'force-dynamic';
+
+const ResumePDFViewerWithNoSSR = dynamicImport(
   () => import('@/components/resume/resume-pdf-viewer'),
   { ssr: false }
 );

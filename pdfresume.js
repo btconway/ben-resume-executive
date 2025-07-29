@@ -1,6 +1,7 @@
 // pdfResume.js
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Link, Image, Font } from '@react-pdf/renderer';
+import { resumeData } from './lib/utils';
 
 // Register fonts (optional)
 Font.register({
@@ -158,209 +159,93 @@ const PDFResume = () => (
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
-          <Text style={styles.name}>Ben Conway</Text>
-          <Text style={styles.title}>Technical Product Lead & AI Enthusiast</Text>
+          <Text style={styles.name}>{resumeData.personal.name}</Text>
+          <Text style={styles.title}>{resumeData.personal.title}</Text>
           <Text style={styles.summary}>
-            Building innovative AI solutions with a focus on healthcare and enterprise applications. 
-            Co-founder with extensive technical product leadership experience and multiple patents 
-            in holographic and 3D technology.
+            {resumeData.personal.summary}
           </Text>
           
           {/* Contact Details */}
           <View style={{ flexDirection: 'row', marginTop: 5 }}>
-            <Text style={styles.contact}>Chicago, IL</Text>
+            <Text style={styles.contact}>{resumeData.personal.location}</Text>
             <Text style={styles.contact}> • </Text>
-            <Link src="mailto:benjamin.t.conway@gmail.com" style={styles.contact}>
-              benjamin.t.conway@gmail.com
+            <Text style={styles.contact}>{resumeData.personal.phone}</Text>
+            <Text style={styles.contact}> • </Text>
+            <Link src={`mailto:${resumeData.personal.email}`} style={styles.contact}>
+              {resumeData.personal.email}
             </Link>
             <Text style={styles.contact}> • </Text>
-            <Link src="https://www.linkedin.com/in/conwaybenjamin/" style={styles.contact}>
-              linkedin.com/in/conwaybenjamin
+            <Link src={`https://${resumeData.personal.linkedin}`} style={styles.contact}>
+              {resumeData.personal.linkedin}
             </Link>
           </View>
         </View>
       </View>
 
-      {/* Skills */}
+      {/* Core Competencies */}
       <View style={styles.section}>
-        <Text style={styles.heading}>Technical Skills</Text>
-        <View style={styles.columnContainer}>
-          <View style={styles.column}>
-            <View style={styles.skillSection}>
-              <Text style={styles.skillCategory}>Programming & Development</Text>
-              <Text style={{ fontSize: 9, marginBottom: 5 }}>
-                Python (Intermediate) • JavaScript/TypeScript (Beginner) • 
-                Next.js (Beginner) • SQL (Beginner) • Git (Beginner)
-              </Text>
-            </View>
-          </View>
-          <View style={styles.column}>
-            <View style={styles.skillSection}>
-              <Text style={styles.skillCategory}>AI & Machine Learning</Text>
-              <Text style={{ fontSize: 9, marginBottom: 5 }}>
-                RAG Architecture • LLM Integration • Vector Databases • 
-                Prompt Engineering • Supabase • Google Cloud Platform • REST APIs
-              </Text>
-            </View>
-          </View>
+        <Text style={styles.heading}>Core Competencies</Text>
+        <View style={styles.skillsContainer}>
+          {resumeData.coreCompetencies.map((competency, index) => (
+            <Text key={index} style={styles.skill}>
+              {competency}
+            </Text>
+          ))}
         </View>
       </View>
 
       {/* Education */}
       <View style={styles.section}>
-        <Text style={styles.heading}>Education & Learning</Text>
-        <View style={styles.columnContainer}>
-          <View style={styles.column}>
-            <View style={styles.education}>
-              <Text style={styles.subheading}>Technical Education Path for AI</Text>
-              <Text style={{ fontSize: 8, color: '#3B82F6', marginBottom: 2 }}>
-                Self-Learning Curriculum for MS in AI Preparation
-              </Text>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  Python Programming & Data Structures - Google Python Advanced Course & LeetCode (2025)
-                </Text>
-              </View>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  Mathematics for ML - MIT OpenCourseWare (Linear Algebra, Calculus, Statistics)
-                </Text>
-              </View>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  Algorithms & CS Theory - UC San Diego Algorithmic Toolbox & Data Structures
-                </Text>
-              </View>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  ML & AI Fundamentals - Stanford CS229 & Fast.ai Deep Learning
-                </Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.column}>
-            <View style={styles.education}>
-              <Text style={styles.subheading}>University of Southern California</Text>
-              <Text style={{ fontSize: 8, color: '#6B7280', marginBottom: 2 }}>2005 - 2009</Text>
-              <Text style={{ fontSize: 9, marginBottom: 2 }}>
-                Bachelor of Science in Business Administration
-              </Text>
-              <Text style={{ fontSize: 8, marginBottom: 2 }}>
-                Entrepreneurship Program at Lloyd Greif Center
-              </Text>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  Relevant Coursework: Calculus, Probability, Business Statistics, Data Analysis
-                </Text>
-              </View>
-              <View style={styles.bulletPoint}>
-                <Text style={styles.bullet}>•</Text>
-                <Text style={styles.bulletText}>
-                  Academic Research: Statistical analysis of technology adoption trends
-                </Text>
-              </View>
-            </View>
-          </View>
+        <Text style={styles.heading}>Education</Text>
+        <View style={styles.education}>
+          <Text style={styles.subheading}>{resumeData.education.university.name}</Text>
+          <Text style={{ fontSize: 8, color: '#6B7280', marginBottom: 2 }}>{resumeData.education.university.location}</Text>
+          <Text style={{ fontSize: 9, marginBottom: 2 }}>
+            {resumeData.education.university.degree} - {resumeData.education.university.emphasis}
+          </Text>
+          <Text style={{ fontSize: 8 }}>
+            {resumeData.education.university.period}
+          </Text>
         </View>
       </View>
 
       {/* Experience */}
       <View style={styles.section}>
         <Text style={styles.heading}>Professional Experience</Text>
-        <View style={styles.experienceItem}>
-          <View style={styles.companyDate}>
-            <Text style={[styles.company, styles.jobTitle]}>Co-Founder & COO</Text>
-            <Text style={styles.date}>August 2012 - Present</Text>
-          </View>
-          <Text style={styles.company}>VNTANA</Text>
-          <View style={{ marginTop: 3 }}>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Raised $15M in venture funding through strategic investor relationships</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Led company pivot from holographic hardware to 3D software platform</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Managed cross-functional teams across product, engineering, and sales</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Co-inventor on multiple patents for holographic technology innovations</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.columnContainer}>
-          <View style={[styles.column, styles.experienceItem]}>
+        {resumeData.experience.map((exp, index) => (
+          <View key={index} style={styles.experienceItem}>
             <View style={styles.companyDate}>
-              <Text style={[styles.company, styles.jobTitle]}>District Manager</Text>
-              <Text style={styles.date}>2010 - 2012</Text>
+              <Text style={[styles.company, styles.jobTitle]}>{exp.position}</Text>
+              <Text style={styles.date}>{exp.period}</Text>
             </View>
-            <Text style={styles.company}>ADP</Text>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Enterprise software implementation and product knowledge</Text>
-            </View>
+            <Text style={styles.company}>{exp.company}{exp.location && ` - ${exp.location}`}</Text>
+            {exp.description && (
+              <Text style={{ fontSize: 8, color: '#6B7280', marginBottom: 3 }}>{exp.description}</Text>
+            )}
+            {exp.categories ? (
+              Object.entries(exp.categories).map(([key, category]) => (
+                <View key={key} style={{ marginTop: 5 }}>
+                  <Text style={[styles.skillCategory, { fontSize: 9 }]}>{category.title}</Text>
+                  {category.details.map((detail, detailIndex) => (
+                    <View key={detailIndex} style={styles.bulletPoint}>
+                      <Text style={styles.bullet}>•</Text>
+                      <Text style={styles.bulletText}>{detail}</Text>
+                    </View>
+                  ))}
+                </View>
+              ))
+            ) : (
+              exp.details && exp.details.map((detail, detailIndex) => (
+                <View key={detailIndex} style={styles.bulletPoint}>
+                  <Text style={styles.bullet}>•</Text>
+                  <Text style={styles.bulletText}>{detail}</Text>
+                </View>
+              ))
+            )}
           </View>
-          <View style={[styles.column, styles.experienceItem]}>
-            <View style={styles.companyDate}>
-              <Text style={[styles.company, styles.jobTitle]}>Co-Founder & CEO</Text>
-              <Text style={styles.date}>2009 - 2010</Text>
-            </View>
-            <Text style={styles.company}>Gameday Glasses</Text>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Early entrepreneurial venture developing consumer products</Text>
-            </View>
-          </View>
-        </View>
+        ))}
       </View>
 
-      {/* Projects */}
-      <View style={styles.section}>
-        <Text style={styles.heading}>Featured Projects</Text>
-        <View style={styles.columnContainer}>
-          <View style={[styles.column, styles.projectItem]}>
-            <Text style={styles.subheading}>Medical Communication Simulation Tool</Text>
-            <Text style={{ fontSize: 8, color: '#6B7280', marginBottom: 2 }}>2023 - Present • Next.js, OpenAI, Supabase</Text>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Designed and built AI system for physicians to practice patient communications</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Developed full-stack app with Next.js, Supabase, and OpenAI integration</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Currently used at University of Chicago for research</Text>
-            </View>
-          </View>
-          <View style={[styles.column, styles.projectItem]}>
-            <Text style={styles.subheading}>AI-Enhanced Sales Assistant</Text>
-            <Text style={{ fontSize: 8, color: '#6B7280', marginBottom: 2 }}>2023 • Python, Langchain, Weaviate</Text>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Built NLP tool to automate sales content generation</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Created knowledge base structure and optimization strategy</Text>
-            </View>
-            <View style={styles.bulletPoint}>
-              <Text style={styles.bullet}>•</Text>
-              <Text style={styles.bulletText}>Solution reduced content creation time by approximately 65%</Text>
-            </View>
-          </View>
-        </View>
-      </View>
 
       {/* Footer */}
       <View style={styles.footer}>
@@ -374,96 +259,64 @@ const PDFResume = () => (
       {/* Patents */}
       <View style={styles.section}>
         <Text style={styles.heading}>Patents & Intellectual Property</Text>
-        <Text style={{ fontSize: 9, marginBottom: 5 }}>Co-Inventor on Multiple Patents</Text>
+        <Text style={{ fontSize: 9, marginBottom: 5 }}>{resumeData.patents.description}</Text>
         <View style={styles.columnContainer}>
           <View style={styles.column}>
             <Text style={{ fontSize: 9, fontWeight: 'bold', marginBottom: 3 }}>AI & Computer Vision Patents</Text>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>US10832424 - Interactive Holographic Avatar Control Systems</Text>
-              <Text>Machine learning system for user interaction with holographic projections</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>US11436504 - Depth Key Compositing Systems</Text>
-              <Text>AI-assisted digital image processing for 3D rendering</Text>
-            </View>
+            {resumeData.patents.ai.map((patent, index) => (
+              <View key={index} style={styles.patentItem}>
+                <Text style={{ fontWeight: 'bold' }}>{patent.id} - {patent.title}</Text>
+                <Text>{patent.description}</Text>
+              </View>
+            ))}
           </View>
           <View style={styles.column}>
             <Text style={{ fontSize: 9, fontWeight: 'bold', marginBottom: 3 }}>Hardware & Projection Patents</Text>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>US9813745 - Foil Tensioning Systems for Pepper's Ghost Illusion</Text>
-              <Text>Novel holographic projection screen technology</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>US10156812 - Low-Profile Bounce Chamber</Text>
-              <Text>Efficient compact holographic projection systems</Text>
-            </View>
+            {resumeData.patents.hardware.map((patent, index) => (
+              <View key={index} style={styles.patentItem}>
+                <Text style={{ fontWeight: 'bold' }}>{patent.id} - {patent.title}</Text>
+                <Text>{patent.description}</Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>
 
-      {/* Research Interests */}
+      {/* Recognition & Professional Involvement */}
       <View style={styles.section}>
-        <Text style={styles.heading}>Research Interests</Text>
+        <Text style={styles.heading}>Recognition & Professional Involvement</Text>
         <View style={styles.columnContainer}>
           <View style={styles.column}>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Natural Language Processing</Text>
-              <Text>Specialized domains (healthcare, education)</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Multimodal AI Systems</Text>
-              <Text>Combining text, image, and 3D data</Text>
-            </View>
+            {resumeData.recognition.slice(0, Math.ceil(resumeData.recognition.length / 2)).map((item, index) => (
+              <View key={index} style={styles.patentItem}>
+                <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+                <Text style={{ fontSize: 8, color: '#6B7280' }}>{item.category} - {item.year || item.details}</Text>
+              </View>
+            ))}
           </View>
           <View style={styles.column}>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Human-AI Interaction</Text>
-              <Text>Communication and collaboration interfaces</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Healthcare AI Applications</Text>
-              <Text>Focus on healthcare AI applications that align with UT Austin's research strengths</Text>
-            </View>
+            {resumeData.recognition.slice(Math.ceil(resumeData.recognition.length / 2)).map((item, index) => (
+              <View key={index} style={styles.patentItem}>
+                <Text style={{ fontWeight: 'bold' }}>{item.title}</Text>
+                <Text style={{ fontSize: 8, color: '#6B7280' }}>{item.category} - {item.year || item.details}</Text>
+              </View>
+            ))}
           </View>
         </View>
       </View>
 
-      {/* Awards */}
-      <View style={styles.section}>
-        <Text style={styles.heading}>Awards & Recognitions</Text>
-        <View style={styles.columnContainer}>
-          <View style={styles.column}>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Unity Award (2024)</Text>
-              <Text>'Most Innovative Consumer Experience' for 3D commerce solutions with Kohler</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Forbes 30 Under 30 (2018)</Text>
-              <Text>Recognized for innovation in technology</Text>
-            </View>
-          </View>
-          <View style={styles.column}>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Inc. 500 (2018)</Text>
-              <Text>Company ranked #497</Text>
-            </View>
-            <View style={styles.patentItem}>
-              <Text style={{ fontWeight: 'bold' }}>Patrick Soon-Shiong Innovation Award (2017)</Text>
-              <Text>Recognized for pioneering work in AR technology by Los Angeles Business Journal</Text>
-            </View>
-          </View>
-        </View>
-      </View>
 
       {/* Footer with contact details */}
       <View style={[styles.footer, { flexDirection: 'row', justifyContent: 'center', gap: 5 }]}>
-        <Text>Ben Conway</Text>
+        <Text>{resumeData.personal.name}</Text>
         <Text>•</Text>
-        <Text>Chicago, IL</Text>
+        <Text>{resumeData.personal.location}</Text>
         <Text>•</Text>
-        <Link src="mailto:benjamin.t.conway@gmail.com">benjamin.t.conway@gmail.com</Link>
+        <Text>{resumeData.personal.phone}</Text>
         <Text>•</Text>
-        <Link src="https://www.linkedin.com/in/conwaybenjamin/">linkedin.com/in/conwaybenjamin</Link>
+        <Link src={`mailto:${resumeData.personal.email}`}>{resumeData.personal.email}</Link>
+        <Text>•</Text>
+        <Link src={`https://${resumeData.personal.linkedin}`}>{resumeData.personal.linkedin}</Link>
         <Text>•</Text>
         <Text>Page 2 of 2</Text>
       </View>

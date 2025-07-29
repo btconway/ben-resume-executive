@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Providers } from '@/components/providers'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Benjamin Conway - Strategic Partnerships & Business Development Executive',
   description: 'Strategic partnerships executive with proven track record of building enterprise technology alliances from zero to industry-leading ecosystem',
